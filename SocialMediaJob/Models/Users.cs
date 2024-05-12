@@ -32,6 +32,9 @@ namespace SocialMediaJob.Models
         public ICollection<Skills> skills { get; set; }
         public ICollection<Education> educations { get; set; }
         public ICollection<Post> posts { get; set; }
+        public ICollection<JobApplications> JobApplications { get; set; }
+        public ICollection<Following> following { get; set; }
+        public ICollection<Connection> connections { get; set; }
 
     }
 }

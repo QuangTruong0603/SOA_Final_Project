@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialMediaJob.Data;
 
@@ -11,9 +12,10 @@ using SocialMediaJob.Data;
 namespace SocialMediaJob.Migrations
 {
     [DbContext(typeof(SocialMediaJobContext))]
-    partial class SocialMediaJobContextModelSnapshot : ModelSnapshot
+    [Migration("20240511142027_db20")]
+    partial class db20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,12 +46,7 @@ namespace SocialMediaJob.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("userId");
 
                     b.ToTable("Connections");
                 });
@@ -138,7 +135,7 @@ namespace SocialMediaJob.Migrations
                     b.Property<int>("FollowerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -160,9 +157,6 @@ namespace SocialMediaJob.Migrations
 
                     b.Property<DateTime?>("Deadline")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Depcription")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EmployerId")
                         .HasColumnType("int");
@@ -332,17 +326,6 @@ namespace SocialMediaJob.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SocialMediaJob.Models.Connection", b =>
-                {
-                    b.HasOne("SocialMediaJob.Models.Users", "User")
-                        .WithMany("connections")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("SocialMediaJob.Models.Education", b =>
                 {
                     b.HasOne("SocialMediaJob.Models.Users", "Users")
@@ -364,7 +347,9 @@ namespace SocialMediaJob.Migrations
 
                     b.HasOne("SocialMediaJob.Models.Users", "User")
                         .WithMany("following")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Employers");
 
@@ -438,8 +423,6 @@ namespace SocialMediaJob.Migrations
             modelBuilder.Entity("SocialMediaJob.Models.Users", b =>
                 {
                     b.Navigation("JobApplications");
-
-                    b.Navigation("connections");
 
                     b.Navigation("educations");
 

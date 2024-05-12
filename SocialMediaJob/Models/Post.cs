@@ -10,6 +10,7 @@ namespace SocialMediaJob.Models
         public string? Title { get; set; }
         public string? Content { get; set; }
         public string? Contentfile { get; set; }
+        public DateTime? Created { get; set; }
         public string username { get; set; }
         [ForeignKey("Users")]
         public int UserId { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialMediaJob.Data;
 
@@ -11,9 +12,10 @@ using SocialMediaJob.Data;
 namespace SocialMediaJob.Migrations
 {
     [DbContext(typeof(SocialMediaJobContext))]
-    partial class SocialMediaJobContextModelSnapshot : ModelSnapshot
+    [Migration("20240512083124_db25")]
+    partial class db25
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -18,5 +18,10 @@ namespace SocialMediaJob.Data
         public DbSet<SocialMediaJob.Models.Education> Educations { get; set; }= default!;
         public DbSet<SocialMediaJob.Models.Skills> Skills { get; set; } = default!;
         public DbSet<SocialMediaJob.Models.Post> Posts { get; set; } = default!;
+        public DbSet<SocialMediaJob.Models.Job> Jobs { get; set; } = default!;
+        public DbSet<SocialMediaJob.Models.JobApplications> JobApplications { get; set; } = default!;
+        public DbSet<SocialMediaJob.Models.Employers> Employers { get; set; } = default!;
+        public DbSet<SocialMediaJob.Models.Connection> Connections { get; set; } = default!;
+        public DbSet<SocialMediaJob.Models.Following> Followings { get; set; } = default!;
     }
 }

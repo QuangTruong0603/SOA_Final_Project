@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialMediaJob.Data;
 
@@ -11,9 +12,10 @@ using SocialMediaJob.Data;
 namespace SocialMediaJob.Migrations
 {
     [DbContext(typeof(SocialMediaJobContext))]
-    partial class SocialMediaJobContextModelSnapshot : ModelSnapshot
+    [Migration("20240511041054_db17")]
+    partial class db17
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,38 +23,6 @@ namespace SocialMediaJob.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("SocialMediaJob.Models.Connection", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Confirm")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ConnectionType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReceiverId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RequestId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("Connections");
-                });
 
             modelBuilder.Entity("SocialMediaJob.Models.Education", b =>
                 {
@@ -124,32 +94,6 @@ namespace SocialMediaJob.Migrations
                     b.ToTable("Employers");
                 });
 
-            modelBuilder.Entity("SocialMediaJob.Models.Following", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("EmployerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FollowerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployerId");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Followings");
-                });
-
             modelBuilder.Entity("SocialMediaJob.Models.Job", b =>
                 {
                     b.Property<int>("JObId")
@@ -160,9 +104,6 @@ namespace SocialMediaJob.Migrations
 
                     b.Property<DateTime?>("Deadline")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Depcription")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EmployerId")
                         .HasColumnType("int");
@@ -243,9 +184,6 @@ namespace SocialMediaJob.Migrations
 
                     b.Property<string>("Contentfile")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -332,17 +270,6 @@ namespace SocialMediaJob.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SocialMediaJob.Models.Connection", b =>
-                {
-                    b.HasOne("SocialMediaJob.Models.Users", "User")
-                        .WithMany("connections")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("SocialMediaJob.Models.Education", b =>
                 {
                     b.HasOne("SocialMediaJob.Models.Users", "Users")
@@ -352,23 +279,6 @@ namespace SocialMediaJob.Migrations
                         .IsRequired();
 
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("SocialMediaJob.Models.Following", b =>
-                {
-                    b.HasOne("SocialMediaJob.Models.Employers", "Employers")
-                        .WithMany("following")
-                        .HasForeignKey("EmployerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SocialMediaJob.Models.Users", "User")
-                        .WithMany("following")
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("Employers");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SocialMediaJob.Models.Job", b =>
@@ -425,8 +335,6 @@ namespace SocialMediaJob.Migrations
 
             modelBuilder.Entity("SocialMediaJob.Models.Employers", b =>
                 {
-                    b.Navigation("following");
-
                     b.Navigation("jobs");
                 });
 
@@ -439,11 +347,7 @@ namespace SocialMediaJob.Migrations
                 {
                     b.Navigation("JobApplications");
 
-                    b.Navigation("connections");
-
                     b.Navigation("educations");
-
-                    b.Navigation("following");
 
                     b.Navigation("posts");
 

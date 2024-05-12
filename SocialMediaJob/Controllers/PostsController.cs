@@ -120,7 +120,8 @@ namespace SocialMediaJob.Controllers
                     Content = post.content,
                     Contentfile = uniqueFileName,
                     username = post.email,
-                    UserId = User.UserID
+                    UserId = User.UserID,
+                    Created = DateTime.Now,
                 };
                 _context.Posts.Add(newpost);
                 _context.SaveChanges();
@@ -159,7 +160,26 @@ namespace SocialMediaJob.Controllers
                 return BadRequest();
             }
         }
-       
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePosts(int id)
+        {
+            if (_context.Posts == null)
+            {
+                return NotFound();
+            }
+            var post = await _context.Posts.FindAsync(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         private bool PostExists(int id)
         {
             return (_context.Posts?.Any(e => e.Id == id)).GetValueOrDefault();

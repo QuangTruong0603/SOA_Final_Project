@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialMediaJob.Data;
 
@@ -11,9 +12,10 @@ using SocialMediaJob.Data;
 namespace SocialMediaJob.Migrations
 {
     [DbContext(typeof(SocialMediaJobContext))]
-    partial class SocialMediaJobContextModelSnapshot : ModelSnapshot
+    [Migration("20240512023759_db24")]
+    partial class db24
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,9 +162,6 @@ namespace SocialMediaJob.Migrations
 
                     b.Property<DateTime?>("Deadline")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Depcription")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EmployerId")
                         .HasColumnType("int");
